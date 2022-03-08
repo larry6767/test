@@ -9,6 +9,6 @@ export const BaseLayoutContainer = styled.div`
   min-height: calc(100vh - 30px * 2);
   margin: 30px auto;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: ${({ theme }) => theme.colors.gray[200]};
 `
