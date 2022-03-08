@@ -1,0 +1,74 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "tsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "jsx-a11y", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/strict"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "no-prototype-builtins": "off",
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/array-type": ["error", { "default": "generic" }],
+    "@typescript-eslint/explicit-function-return-type": ["off"],
+    "@typescript-eslint/explicit-member-accessibility": ["off"],
+    "@typescript-eslint/indent": ["off"],
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/no-implicit-any-catch": ["error"],
+    "@typescript-eslint/no-unsafe-assignment": ["error"],
+    "@typescript-eslint/no-unsafe-call": ["error"],
+    "@typescript-eslint/no-unsafe-member-access": ["error"],
+    "@typescript-eslint/no-unsafe-return": ["error"],
+    "@typescript-eslint/no-var-requires": ["error"],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "none"
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "no-shadow": ["off"],
+    "@typescript-eslint/no-shadow": ["error"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["build", ".next", "node_modules", "**/*.js"]
+}

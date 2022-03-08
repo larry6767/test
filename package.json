@@ -20,7 +20,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "format": "prettier --write \"**/*.{js,ts,tsx}\"",
+    "format-json": "prettier --write \"**/*.{md,json}\"",
+    "lint": "eslint . --ext ts --ext tsx --ext js --fix",
+    "type-check": "tsc --pretty --noEmit --incremental false",
+    "drop": "rm -rf node_modules && yarn"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.5.1"
   }
 }
