@@ -8,16 +8,20 @@ import {
   AlertIcon,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { isRight } from 'fp-ts/lib/These'
 // local libs
 import { Form } from './styles'
-import { formConfig } from './assets/fixtures'
+import { formConfigTextarea } from './assets/fixtures'
 import { useValidation } from './useValidation'
+import { useStoreon } from 'src/store'
 // types
 import { ConfigFormFields } from './types'
 import type { ConfigFormValues } from './types'
+import { FormConfigActions, FormConfigCodec } from 'src/store/formConfig'
 
 export const ConfigForm = () => {
-  const { name, label, placeholder } = formConfig
+  const { dispatch } = useStoreon()
+  const { name, label, placeholder } = formConfigTextarea
   const schema = useValidation()
   const {
     handleSubmit,
@@ -32,11 +36,27 @@ export const ConfigForm = () => {
   function onSubmit(values: ConfigFormValues): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const parsedJson = JSON.parse(values.formConfig)
-        const formatedValue = JSON.stringify(parsedJson, undefined, 4)
-        setValue(ConfigFormFields.formConfig, formatedValue)
-        resolve()
-      }, 1000)
+        // After validation, we can be sure that the data is correct.
+        // TODO: get rid of duplicate field value parsing (see ./useValidation)
+        let formConfig
+        try {
+          formConfig = JSON.parse(values.formConfig)
+        } catch (e) {
+          return false
+        }
+        const decodedFormConfig = FormConfigCodec.decode(formConfig)
+
+        if (isRight(decodedFormConfig)) {
+          const formatedValue = JSON.stringify(
+            decodedFormConfig.right,
+            undefined,
+            4,
+          )
+          setValue(ConfigFormFields.formConfig, formatedValue)
+          dispatch(FormConfigActions.set, decodedFormConfig.right)
+          resolve()
+        }
+      }, 1000) // emulate the delay
     })
   }
 

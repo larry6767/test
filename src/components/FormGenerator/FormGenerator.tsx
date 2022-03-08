@@ -3,6 +3,7 @@ import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
 // local libs
 import { FormGeneratorContainer } from './styles'
 import { ConfigForm } from './ConfigForm'
+import { Output } from './Output'
 
 export const FormGenerator = () => {
   return (
@@ -17,7 +18,7 @@ export const FormGenerator = () => {
             <ConfigForm />
           </TabPanel>
           <TabPanel>
-            <p>result!</p>
+            <Output />
           </TabPanel>
         </TabPanels>
       </Tabs>
