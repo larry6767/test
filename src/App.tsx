@@ -1,7 +1,16 @@
 import React from 'react'
+import { ChakraProvider } from '@chakra-ui/react'
+// local libs
+import { globalStyles } from './global-styles'
+import { BaseLayout } from 'src/components/layout/BaseLayout'
 
 function App() {
-  return <div className="App">test</div>
+  return (
+    <ChakraProvider>
+      {globalStyles}
+      <BaseLayout>test</BaseLayout>
+    </ChakraProvider>
+  )
 }
 
 export default App
