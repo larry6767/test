@@ -6,12 +6,13 @@ import {
   Button,
   Alert,
   AlertIcon,
+  Code,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { isRight } from 'fp-ts/lib/These'
 // local libs
 import { Form } from './styles'
-import { formConfigTextarea } from './assets/fixtures'
+import { formConfigTextarea, jsonForTests } from './assets/fixtures'
 import { schema } from './validation'
 import { useStoreon } from 'src/store'
 // types
@@ -52,6 +53,11 @@ export const ConfigForm = ({ openResultTab }: ConfigFormProps) => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <Alert status="info">
+        <AlertIcon />
+        You can use the json below for testing
+      </Alert>
+      <Code mb={10}>{jsonForTests}</Code>
       <FormControl>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Textarea

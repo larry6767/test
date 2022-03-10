@@ -16,17 +16,26 @@ export enum InputPropsEnum {
   checked = 'checked',
 }
 
+export enum InputTypeEnum {
+  numberfield = 'numberfield',
+  textfield = 'textfield',
+  textarea = 'textarea',
+  checkbox = 'checkbox',
+  dateflied = 'dateflied',
+  radio = 'radio',
+}
+
 export const InputPropsCodec = t.exact(
   t.type({
     [InputPropsEnum.name]: t.string,
     [InputPropsEnum.label]: t.string,
     [InputPropsEnum.placeholder]: t.string,
     [InputPropsEnum.type]: t.union([
-      t.literal('numberfield'),
-      t.literal('textfield'),
-      t.literal('textarea'),
-      t.literal('checkbox'),
-      t.literal('dateflied'),
+      t.literal(InputTypeEnum.numberfield),
+      t.literal(InputTypeEnum.textfield),
+      t.literal(InputTypeEnum.textarea),
+      t.literal(InputTypeEnum.checkbox),
+      t.literal(InputTypeEnum.dateflied),
     ]),
   }),
 )
@@ -35,7 +44,7 @@ export const RadioPropsCodec = t.exact(
   t.type({
     [InputPropsEnum.name]: t.string,
     [InputPropsEnum.placeholder]: t.string,
-    [InputPropsEnum.type]: t.literal('radio'),
+    [InputPropsEnum.type]: t.literal(InputTypeEnum.radio),
     [InputPropsEnum.items]: t.array(
       t.intersection([
         t.type({
@@ -54,6 +63,8 @@ export const FormConfigCodec = t.type({
   items: t.array(t.union([InputPropsCodec, RadioPropsCodec])),
 })
 
+export type InputItem = t.TypeOf<typeof InputPropsCodec>
+export type RadioItem = t.TypeOf<typeof RadioPropsCodec>
 export type FormConfig = t.TypeOf<typeof FormConfigCodec>
 
 export type FormConfigState = {

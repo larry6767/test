@@ -1,6 +1,7 @@
 import { Alert, AlertIcon } from '@chakra-ui/react'
 // local libs
 import { useStoreon } from 'src/store'
+import { InputMapper } from 'src/components/generic'
 
 export const Output = () => {
   const { formConfig } = useStoreon('formConfig')
@@ -10,6 +11,6 @@ export const Output = () => {
       You need to provide json config in the config tab
     </Alert>
   ) : (
-    <div>{JSON.stringify(formConfig, null, 4)}</div>
+    <InputMapper items={formConfig.items} />
   )
 }

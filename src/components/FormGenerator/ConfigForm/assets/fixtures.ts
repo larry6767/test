@@ -15,31 +15,31 @@ export const jsonForTests = `
     {
       "name": "numberfield",
       "label": "numberfield",
-      "placeholder": "numberfield",
+      "placeholder": "numberfield placeholder",
       "type": "numberfield"
     },
     {
       "name": "textfield",
       "label": "textfield",
-      "placeholder": "textfield",
+      "placeholder": "textfield placeholder",
       "type": "textfield"
     },
     {
       "name": "textarea",
       "label": "textarea",
-      "placeholder": "textarea",
+      "placeholder": "textarea placeholder",
       "type": "textarea"
     },
     {
       "name": "checkbox",
       "label": "checkbox",
-      "placeholder": "checkbox",
+      "placeholder": "checkbox placeholder",
       "type": "checkbox"
     },
     {
       "name": "dateflied",
       "label": "dateflied",
-      "placeholder": "dateflied",
+      "placeholder": "dateflied placeholder",
       "type": "dateflied"
     },
     {
@@ -48,13 +48,13 @@ export const jsonForTests = `
       "type": "radio",
       "items": [
         {
-          "id": "string",
-          "label": "string",
+          "id": "first",
+          "label": "first",
           "checked": false
         },
         {
-          "id": "string",
-          "label": "string"
+          "id": "second",
+          "label": "second"
         }
       ]
     }
