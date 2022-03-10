@@ -4,6 +4,7 @@ import * as t from 'io-ts'
 export enum FormConfigActions {
   init = '@init',
   set = 'formConfig/set',
+  reset = 'formConfig/reset',
 }
 
 export enum ButtonPropsEnum {
@@ -106,6 +107,7 @@ export type FormConfigState = {
 
 export type FormConfigEvents = {
   [FormConfigActions.set]: FormConfig
+  [FormConfigActions.reset]: void
 }
 
 type FormConfigModule = StoreonModule<FormConfigState | null, FormConfigEvents>
@@ -117,5 +119,9 @@ export const formConfig: FormConfigModule = (store) => {
 
   store.on(FormConfigActions.set, (_state, payload) => {
     return { formConfig: { ...payload } }
+  })
+
+  store.on(FormConfigActions.reset, (_state) => {
+    return { formConfig: null }
   })
 }

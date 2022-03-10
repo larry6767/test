@@ -1,13 +1,12 @@
-import { Alert, AlertIcon, Heading } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 // local libs
 import { useStoreon } from 'src/store'
-import { Form, InputMapper, ButtonMapper } from 'src/components/generic'
+import { Form, InputMapper, ButtonMapper, Alert } from 'src/components/generic'
 
 export const Output = () => {
   const { formConfig } = useStoreon('formConfig')
   return !formConfig ? (
-    <Alert status="info" borderRadius={8}>
-      <AlertIcon />
+    <Alert status="info">
       You need to provide json config in the config tab
     </Alert>
   ) : (

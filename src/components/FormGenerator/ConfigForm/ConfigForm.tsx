@@ -1,19 +1,17 @@
 import { useForm } from 'react-hook-form'
 import {
-  Heading,
   FormLabel,
   FormControl,
   Textarea,
   Button,
-  Alert,
-  AlertIcon,
-  Code,
+  ButtonGroup,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { isRight } from 'fp-ts/lib/These'
 // local libs
-import { Form } from 'src/components/generic'
-import { formConfigTextarea, jsonForTests } from './assets/fixtures'
+import { FormText } from './FormText'
+import { Form, Alert } from 'src/components/generic'
+import { formConfigTextarea } from './assets/fixtures'
 import { schema } from './validation'
 import { useStoreon } from 'src/store'
 // types
@@ -30,6 +28,8 @@ export const ConfigForm = ({ openResultTab }: ConfigFormProps) => {
     register,
     formState: { errors, isSubmitting },
     setValue,
+    reset,
+    formState: { isDirty },
   } = useForm<ConfigFormValues>({
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -52,18 +52,13 @@ export const ConfigForm = ({ openResultTab }: ConfigFormProps) => {
     }
   }
 
+  const resetFormGenerator = () => {
+    reset()
+    dispatch(FormConfigActions.reset)
+  }
   return (
     <Form onSubmit={handleSubmit(onSubmit)} maxWidth="100%">
-      <Heading textAlign="center" mb={10}>
-        Configuration form
-      </Heading>
-      <Alert status="info" borderTopRadius={8}>
-        <AlertIcon />
-        You can use the json below for testing
-      </Alert>
-      <Code borderBottomRadius={8} mb={10} padding={4}>
-        {jsonForTests}
-      </Code>
+      <FormText />
       <FormControl>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Textarea
@@ -74,22 +69,32 @@ export const ConfigForm = ({ openResultTab }: ConfigFormProps) => {
           {...register(name)}
         />
         {errors[name] ? (
-          <Alert status="error" borderRadius={8}>
-            <AlertIcon />
-            {errors[name]?.message}
-          </Alert>
+          <Alert status="error">{errors[name]?.message}</Alert>
         ) : null}
       </FormControl>
-      <Button
-        mt={4}
-        ml="auto"
-        colorScheme="teal"
-        isLoading={isSubmitting}
-        isDisabled={Boolean(errors[name])}
-        type="submit"
-      >
-        Apply
-      </Button>
+      <ButtonGroup gap={2}>
+        <Button
+          mt={4}
+          ml="auto"
+          colorScheme="teal"
+          isLoading={isSubmitting}
+          type="reset"
+          isDisabled={!isDirty}
+          onClick={resetFormGenerator}
+        >
+          Reset
+        </Button>
+        <Button
+          mt={4}
+          ml="auto"
+          colorScheme="teal"
+          isLoading={isSubmitting}
+          isDisabled={Boolean(errors[name])}
+          type="submit"
+        >
+          Apply
+        </Button>
+      </ButtonGroup>
     </Form>
   )
 }
