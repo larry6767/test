@@ -1,4 +1,3 @@
-import React from 'react'
 import { Alert, AlertIcon } from '@chakra-ui/react'
 // local libs
 import { useStoreon } from 'src/store'

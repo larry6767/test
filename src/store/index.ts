@@ -4,8 +4,8 @@ import { customContext } from 'storeon/react'
 import { storeonLogger } from 'storeon/devtools'
 // local libs
 import { formConfig } from './formConfig'
-
-import { FormConfigState, FormConfigEvents } from './formConfig'
+// types
+import type { FormConfigState, FormConfigEvents } from './formConfig'
 
 type State = FormConfigState
 
