@@ -11,7 +11,19 @@ export const formConfigTextarea = {
 
 export const jsonForTests = `
 {
-  "items": [
+  "formTitle": "Test form",
+  "buttons": [
+    {
+      "value": "reset",
+      "type": "reset"
+    },
+    {
+      "value": "submit",
+      "type": "submit",
+      "isDisabled": true
+    }
+  ],
+  "inputs": [
     {
       "name": "numberfield",
       "label": "numberfield",

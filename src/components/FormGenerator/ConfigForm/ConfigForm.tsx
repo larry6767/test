@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import {
+  Heading,
   FormLabel,
   FormControl,
   Textarea,
@@ -11,7 +12,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import { isRight } from 'fp-ts/lib/These'
 // local libs
-import { Form } from './styles'
+import { Form } from 'src/components/generic'
 import { formConfigTextarea, jsonForTests } from './assets/fixtures'
 import { schema } from './validation'
 import { useStoreon } from 'src/store'
@@ -52,12 +53,17 @@ export const ConfigForm = ({ openResultTab }: ConfigFormProps) => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Alert status="info">
+    <Form onSubmit={handleSubmit(onSubmit)} maxWidth="100%">
+      <Heading textAlign="center" mb={10}>
+        Configuration form
+      </Heading>
+      <Alert status="info" borderTopRadius={8}>
         <AlertIcon />
         You can use the json below for testing
       </Alert>
-      <Code mb={10}>{jsonForTests}</Code>
+      <Code borderBottomRadius={8} mb={10} padding={4}>
+        {jsonForTests}
+      </Code>
       <FormControl>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Textarea
@@ -68,7 +74,7 @@ export const ConfigForm = ({ openResultTab }: ConfigFormProps) => {
           {...register(name)}
         />
         {errors[name] ? (
-          <Alert status="error">
+          <Alert status="error" borderRadius={8}>
             <AlertIcon />
             {errors[name]?.message}
           </Alert>

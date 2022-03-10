@@ -6,6 +6,18 @@ export enum FormConfigActions {
   set = 'formConfig/set',
 }
 
+export enum ButtonPropsEnum {
+  value = 'value',
+  type = 'type',
+  isDisabled = 'isDisabled',
+}
+
+export enum ButtonTypeEnum {
+  submit = 'submit',
+  reset = 'reset',
+  button = 'button',
+}
+
 export enum InputPropsEnum {
   name = 'name',
   label = 'label',
@@ -59,12 +71,33 @@ export const RadioPropsCodec = t.exact(
   }),
 )
 
-export const FormConfigCodec = t.type({
-  items: t.array(t.union([InputPropsCodec, RadioPropsCodec])),
-})
+export const ButtonPropsCodec = t.exact(
+  t.intersection([
+    t.type({
+      [ButtonPropsEnum.value]: t.string,
+      [ButtonPropsEnum.type]: t.union([
+        t.literal(ButtonTypeEnum.button),
+        t.literal(ButtonTypeEnum.submit),
+        t.literal(ButtonTypeEnum.reset),
+      ]),
+    }),
+    t.partial({
+      [ButtonPropsEnum.isDisabled]: t.boolean,
+    }),
+  ]),
+)
+
+export const FormConfigCodec = t.exact(
+  t.type({
+    formTitle: t.string,
+    buttons: t.array(ButtonPropsCodec),
+    inputs: t.array(t.union([InputPropsCodec, RadioPropsCodec])),
+  }),
+)
 
 export type InputItem = t.TypeOf<typeof InputPropsCodec>
 export type RadioItem = t.TypeOf<typeof RadioPropsCodec>
+export type ButtonProps = t.TypeOf<typeof ButtonPropsCodec>
 export type FormConfig = t.TypeOf<typeof FormConfigCodec>
 
 export type FormConfigState = {
